@@ -1,0 +1,113 @@
+workspace {
+
+    model {
+        user = person "Obstetrician"
+        user2 = person "Pregnant Woman"
+        user3 = person "Visitor"
+        group softwaresystem{
+            softwareSystem = softwareSystem "OBYCARE"{
+                MobileApplication = container "Mobile Application" {
+                    ui = component "Screen and Interface design"
+                    navigation = component "Navigation logic"
+                    input = component "User input"
+                    storage = component "data storage"
+                }
+                Website = container "Web application" {
+                    front = component "Front end"
+                    back = component "Back end"
+                    dbinteraction = component "Database interactions"
+                    forms = component "Forms"
+                    server = component "Request processor server"
+                }
+                database = container "Database" "database engine of patients and doctors" "MYSQL" "database"
+                landingpage = container "Landing Page" {
+                    header = component "Header"
+                    callToAction = component "Call To Action"
+                    descriptions = component "Descriptions"
+                    testimonials = component "Testimonials"
+                    registration = component "Registration Form"
+                    contact = component "Contact Form"
+                }
+                APIaplication  = container "API" {
+                    register = component "Register Context"
+                    appointment = component "Appointment management context"
+                    subscription = component "Subscription context"
+                    pregnancyMonitoring = component "Pregnancy Monitoring context"
+                    feedback = component "Feedback context"
+                    
+                }
+            }
+           
+        }
+        paymentsystem = softwareSystem "Visa" "payment system"
+        conferencingSystem = softwareSystem "Zoom" "conferencing system"
+
+        
+        
+        user -> MobileApplication "Uses"
+        user -> Website "Uses"
+        user2 -> MobileApplication "Uses"
+        user2 -> Website "Uses"
+        user3 -> landingpage "Uses"
+        MobileApplication -> APIaplication
+        APIaplication -> paymentsystem
+        APIaplication -> conferencingSystem
+        Website -> APIaplication "Uses"
+        APIaplication -> database
+        Website -> landingpage "website design"
+        Website -> header
+        Website -> callToAction
+        Website -> descriptions
+        Website -> testimonials
+        Website -> registration
+        Website -> contact
+        MobileApplication -> register "makes API calls to"
+        MobileApplication -> appointment "makes API calls to"
+        MobileApplication -> subscription "makes API calls to"
+        MobileApplication -> pregnancyMonitoring "makes API calls to"
+        MobileApplication -> feedback "makes API calls to"
+        Website -> register "makes API calls to"
+        Website -> appointment "makes API calls to"
+        Website -> subscription "makes API calls to"
+        Website -> pregnancyMonitoring "makes API calls to"
+        Website -> feedback "makes API calls to"
+        appointment -> conferencingSystem "contact between patient and obstetrician"
+        subscription -> paymentSystem "use of the system for the payment of plans"
+        register -> database "user data management"
+        user -> ui "make use"
+        user -> navigation "make use" 
+        user -> input "make use"
+        user2 -> ui "make use"
+        user2 -> navigation "make use"
+        user2 -> input "make use"
+        storage -> input
+        storage -> database "stores the data"
+        back -> front "data proccess"
+        user -> front
+        user2 -> front
+        front -> landingpage
+        dbinteraction -> database
+        server -> dbinteraction
+        front -> forms
+        dbinteraction -> forms "get data"
+        
+        
+
+
+
+
+    }
+
+    views {
+    theme default
+         styles {
+             element database {
+                shape Cylinder
+             }
+             
+             
+         }
+       
+    }
+
+}
