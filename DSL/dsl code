@@ -1,4 +1,4 @@
-workspace {
+{
 
     model {
         user = person "Obstetrician"
@@ -7,17 +7,18 @@ workspace {
         group softwaresystem{
             softwareSystem = softwareSystem "OBYCARE"{
                 MobileApplication = container "Mobile Application" {
-                    ui = component "Screen and Interface design"
-                    navigation = component "Navigation logic"
-                    input = component "User input"
-                    storage = component "data storage"
+                    Registerapp = component "Register component"
+                    appointmentAPP = component "Appointment Component"
+                    subscriptionAPP = component "Subscription component"
+                    pregnancyMonitoringAPP = component "Pregnancy Component"
+                    feedbackAPP = component "Feedback component"
                 }
                 Website = container "Web application" {
-                    front = component "Front end"
-                    back = component "Back end"
-                    dbinteraction = component "Database interactions"
-                    forms = component "Forms"
-                    server = component "Request processor server"
+                    RegisterWEB = component "Register component"
+                    appointmentWEB = component "Appointment Component"
+                    subscriptionWEB = component "Subscription component"
+                    pregnancyMonitoringWEB = component "Pregnancy Component"
+                    feedbackWEB = component "Feedback component"
                 }
                 database = container "Database" "database engine of patients and doctors" "MYSQL" "database"
                 landingpage = container "Landing Page" {
@@ -39,7 +40,7 @@ workspace {
             }
            
         }
-        paymentsystem = softwareSystem "Visa" "payment system"
+        paymentsystem = softwareSystem "Stripe" "payment system"
         conferencingSystem = softwareSystem "Zoom" "conferencing system"
 
         
@@ -73,25 +74,49 @@ workspace {
         Website -> feedback "makes API calls to"
         appointment -> conferencingSystem "contact between patient and obstetrician"
         subscription -> paymentSystem "use of the system for the payment of plans"
-        register -> database "user data management"
-        user -> ui "make use"
-        user -> navigation "make use" 
-        user -> input "make use"
-        user2 -> ui "make use"
-        user2 -> navigation "make use"
-        user2 -> input "make use"
-        storage -> input
-        storage -> database "stores the data"
-        back -> front "data proccess"
-        user -> front
-        user2 -> front
-        front -> landingpage
-        dbinteraction -> database
-        server -> dbinteraction
-        front -> forms
-        dbinteraction -> forms "get data"
+
+        user -> Registerapp "make use" 
+        user2 -> Registerapp "make use"
+
+
         
         
+        Registerapp -> APIaplication
+        appointmentAPP -> APIaplication
+        subscriptionAPP -> APIaplication
+        pregnancyMonitoringAPP -> APIaplication
+        feedbackAPP -> APIaplication
+        
+        user -> Registerapp
+        user -> appointmentAPP
+        user -> subscriptionAPP
+        user -> pregnancyMonitoringAPP
+        user -> feedbackAPP
+        
+        user2 -> Registerapp
+        user2 -> appointmentAPP
+        user2 -> subscriptionAPP
+        user2 -> pregnancyMonitoringAPP
+        user2 -> feedbackAPP
+        
+        user -> RegisterWEB
+        user -> appointmentWEB
+        user -> subscriptionWEB
+        user -> pregnancyMonitoringWEB
+        user -> feedbackAPP
+        
+        user2 -> RegisterWEB
+        user2 -> appointmentWEB
+        user2 -> subscriptionWEB
+        user2 -> pregnancyMonitoringWEB
+        user2 -> feedbackWEB
+        
+        RegisterWEB -> APIaplication
+        appointmentWEB -> APIaplication
+        subscriptionWEB -> APIaplication
+        pregnancyMonitoringWEB -> APIaplication
+        feedbackWEB -> APIaplication
+    
 
 
 
